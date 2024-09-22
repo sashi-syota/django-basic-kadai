@@ -12,22 +12,25 @@
           <th>価格</th>
           <th>カテゴリ</th>
           <th>商品説明</th>
+          <th>画像</th>  <!-- 新しい列を追加 -->
       </tr>
   </thead>
-  <tr>
-      <td>{{ object.name }}</td>
-      <td>{{ object.price }} 円</td>
-      <td>{{ object.category }}</td>
-      <td>{{ object.description }}</td>
-  <br>   
-  </tr>   
+  <tbody>
+      <tr>
+          <td>{{ object.name }}</td>
+          <td>{{ object.price }} 円</td>
+          <td>{{ object.category }}</td>
+          <td>{{ object.description }}</td>
+          <td>
+              {% if object.image %}
+                  <img src="{{ object.image.url }}" alt="{{ object.name }}" style="max-width: 100px; height: auto;">
+              {% else %}
+                  <p>画像がありません。</p>
+              {% endif %}
+          </td>
+      </tr>
+  </tbody>
 </table>
-
-{% if object.image %}
-    <img src="{{ object.image.url }}" alt="{{ object.name }}" style="max-width: 300px; height: auto;">
-{% else %}
-    <p>画像がありません。</p>
-{% endif %}
 
 <a href="{% url 'list' %}">商品一覧に戻る</a>
 <a href="{% url 'edit' pk=object.pk %}">編集</a>
